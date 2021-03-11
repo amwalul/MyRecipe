@@ -1,11 +1,11 @@
 package com.amwa.core.ui
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.amwa.core.R
 import com.amwa.core.databinding.ItemRecipeBinding
 import com.amwa.core.domain.model.recipe.Recipe
@@ -68,6 +68,7 @@ class RecipeAdapter(private val interaction: Interaction? = null) :
             Glide.with(root.context)
                 .load(item.image)
                 .into(ivImage)
+            ivImage.contentDescription = item.title
 
             tvTitle.text = item.title
         }

@@ -7,11 +7,5 @@ data class StepResponse(
     @SerializedName("number")
     val number: Int,
     @SerializedName("step")
-    val step: String,
-    @SerializedName("ingredients")
-    val ingredients: List<IngredientResponse>,
-    @SerializedName("equipment")
-    val equipment: List<EquipmentResponse>,
-    @SerializedName("length")
-    val length: LengthResponse
+    val step: String
 )

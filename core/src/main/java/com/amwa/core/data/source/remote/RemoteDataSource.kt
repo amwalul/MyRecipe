@@ -37,7 +37,6 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getRecipes(ids: String): Flow<ApiResponse<List<RecipeResponse>>> = flow {
         try {
-            intArrayOf()
             val data = apiService.getRecipes(ids)
             val result = ApiResponse.Success(data)
             emit(result)

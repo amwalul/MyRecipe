@@ -61,6 +61,7 @@ class IngredientAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .load(Constants.INGREDIENT_IMG_BASE_URL + item.image)
                 .placeholder(R.drawable.icons8_ingredients_100)
                 .into(ivImage)
+            ivImage.contentDescription = item.name
 
             tvTitle.text = item.name
             tvAmount.text = "${item.amount} ${item.unit}"

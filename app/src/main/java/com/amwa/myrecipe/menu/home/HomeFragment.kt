@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.amwa.core.data.Resource
 import com.amwa.core.domain.model.recipe.Recipe
 import com.amwa.core.extension.invisible
+import com.amwa.core.extension.setGone
 import com.amwa.core.extension.showShortToast
 import com.amwa.core.extension.visible
 import com.amwa.core.ui.RecipeAdapter
@@ -47,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecipeAdapter.Interaction
 
     private fun initSearchView() {
         binding?.etSearch?.apply {
-            doOnTextChanged { text, start, before, count ->
+            doOnTextChanged { text, _, _, _ ->
                 if (text.isNullOrBlank()) {
                     viewModel.getAllRecipes()
                 } else {
@@ -66,6 +67,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecipeAdapter.Interaction
         }
     }
 
+    private fun toggleEmptyView(isEmpty: Boolean) {
+        binding?.apply {
+            tvEmpty.setGone(!isEmpty)
+            rvRecipe.setGone(isEmpty)
+        }
+    }
+
     private fun initObservers() {
         viewModel.recipeList.observe(viewLifecycleOwner, {
             val resource = it ?: return@observe
@@ -74,6 +82,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecipeAdapter.Interaction
                 is Resource.Success -> {
                     binding?.progressBar?.invisible()
                     resource.data?.let { data ->
+                        toggleEmptyView(data.isEmpty())
                         recipeAdapter.submitList(data)
                     }
                 }
@@ -95,6 +104,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecipeAdapter.Interaction
                         resource.data?.let { data ->
                             val ids = data.map { autocomplete -> autocomplete.id }.toIntArray()
                             if (ids.isEmpty()) {
+                                toggleEmptyView(true)
                                 recipeAdapter.submitList(emptyList())
                             } else {
                                 viewModel.getRecipes(ids)

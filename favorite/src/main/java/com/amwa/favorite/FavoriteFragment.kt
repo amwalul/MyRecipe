@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.amwa.core.domain.model.recipe.Recipe
+import com.amwa.core.extension.setGone
 import com.amwa.core.ui.RecipeAdapter
 import com.amwa.favorite.databinding.FragmentFavoriteBinding
 import com.amwa.favorite.di.DaggerFavoriteComponent
@@ -54,8 +55,12 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), RecipeAdapter.Int
     }
 
     private fun initObservers() {
-        viewModel.recipeList.observe(viewLifecycleOwner, {
-            val recipeList = it ?: return@observe
+        viewModel.recipeList.observe(viewLifecycleOwner, { recipeList ->
+            binding?.apply {
+                tvEmpty.setGone(!recipeList.isNullOrEmpty())
+                rvRecipe.setGone(recipeList.isNullOrEmpty())
+            }
+
             recipeAdapter.submitList(recipeList)
         })
     }

@@ -9,4 +9,9 @@
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="@string/favorite" />
+
+    <item
+        android:id="@+id/aboutFragment"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/about" />
 </menu>

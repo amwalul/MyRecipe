@@ -4,8 +4,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
+    <string name="about">About</string>
     <string name="title_favorite">Favorite</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="search">Search</string>
+    <string name="no_data">No data</string>
+    <string name="favorite_button">Favorite button</string>
+    <string name="application_name">App name</string>
+    <string name="app_name_format">%1$s v%2$s</string>
+    <string name="developer_name">Developer name</string>
+    <string name="dev_name">Amwa Dev</string>
 </resources>

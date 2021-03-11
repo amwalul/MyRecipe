@@ -42,20 +42,22 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun initHeaderView() {
         binding?.apply {
-            with(args.recipe) {
-                Glide.with(requireView())
-                    .load(image)
-                    .into(ivImage)
+            val recipe = args.recipe
 
-                toggleFavorite(isFavorite)
-                btnFavorite.setOnClickListener {
-                    isFavorite = !isFavorite
-                    viewModel.setFavoriteRecipe(this, isFavorite)
-                    toggleFavorite(isFavorite)
-                }
+            Glide.with(requireView())
+                .load(recipe.image)
+                .into(ivImage)
+            ivImage.contentDescription = recipe.title
 
-                tvTitle.text = title
+            toggleFavorite(recipe.isFavorite)
+            btnFavorite.setOnClickListener {
+                recipe.isFavorite = !recipe.isFavorite
+                viewModel.setFavoriteRecipe(recipe, recipe.isFavorite)
+                toggleFavorite(recipe.isFavorite)
             }
+            btnFavorite.contentDescription = getString(R.string.favorite_button)
+
+            tvTitle.text = recipe.title
         }
     }
 
