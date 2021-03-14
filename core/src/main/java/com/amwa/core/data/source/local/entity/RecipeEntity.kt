@@ -10,7 +10,7 @@ data class RecipeEntity(
     @NonNull
     val id: Int,
     val title: String,
-    val image: String,
+    val image: String?,
     val ingredients: List<IngredientEntity>,
     val instructions: List<InstructionEntity>,
     var isFavorite: Boolean = false

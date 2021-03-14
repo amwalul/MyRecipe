@@ -2,7 +2,6 @@ package com.amwa.myrecipe.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -46,18 +45,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
             Glide.with(requireView())
                 .load(recipe.image)
+                .placeholder(R.drawable.recipe_placeholder_1)
                 .into(ivImage)
             ivImage.contentDescription = recipe.title
 
             toggleFavorite(recipe.isFavorite)
-            btnFavorite.setOnClickListener {
-                recipe.isFavorite = !recipe.isFavorite
-                viewModel.setFavoriteRecipe(recipe, recipe.isFavorite)
-                toggleFavorite(recipe.isFavorite)
-            }
-            btnFavorite.contentDescription = getString(R.string.favorite_button)
 
             tvTitle.text = recipe.title
+        }
+    }
+
+    private fun initFavoriteButton() {
+        binding?.btnFavorite?.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setFavoriteRecipe(args.recipe, isChecked)
         }
     }
 
@@ -74,29 +74,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun toggleFavorite(isFavorite: Boolean) {
-        binding?.btnFavorite?.apply {
-            if (isFavorite) {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_baseline_favorite_24
-                    )
-                )
-            } else {
-                setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_baseline_favorite_border_24
-                    )
-                )
-            }
-        }
+        binding?.btnFavorite?.isChecked = isFavorite
     }
 
     private fun initObservers() {
-        viewModel.getSavedRecipe(args.recipe.id).observe(viewLifecycleOwner, {
-            val recipe = it ?: return@observe
-            toggleFavorite(recipe.isFavorite)
+        viewModel.getSavedRecipe(args.recipe.id).observe(viewLifecycleOwner, { recipe ->
+            recipe?.let { toggleFavorite(recipe.isFavorite) }
+            initFavoriteButton()
         })
     }
 

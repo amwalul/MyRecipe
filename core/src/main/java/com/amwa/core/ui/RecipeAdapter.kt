@@ -67,6 +67,7 @@ class RecipeAdapter(private val interaction: Interaction? = null) :
 
             Glide.with(root.context)
                 .load(item.image)
+                .placeholder(R.drawable.recipe_placeholder_1)
                 .into(ivImage)
             ivImage.contentDescription = item.title
 

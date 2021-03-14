@@ -122,6 +122,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), RecipeAdapter.Interaction
     }
 
     override fun onDestroyView() {
+        binding?.rvRecipe?.adapter = null
         binding = null
         super.onDestroyView()
     }

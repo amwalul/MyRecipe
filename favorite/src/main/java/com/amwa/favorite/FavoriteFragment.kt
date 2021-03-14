@@ -66,6 +66,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), RecipeAdapter.Int
     }
 
     override fun onDestroyView() {
+        binding?.rvRecipe?.adapter = null
         binding = null
         super.onDestroyView()
     }

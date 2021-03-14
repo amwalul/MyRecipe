@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_grey_50"
-    tools:context="com.amwa.favorite.FavoriteFragment">
+    tools:context="com.amwa.favorite.FavoriteFragment"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/tvEmpty"
@@ -18,8 +19,8 @@
         android:id="@+id/rvRecipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:padding="8dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_recipe" />
 

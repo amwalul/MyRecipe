@@ -8,7 +8,7 @@ data class RecipeResponse(
     @SerializedName("title")
     val title: String,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("extendedIngredients")
     val extendedIngredients: List<ExtendedIngredientResponse>,
     @SerializedName("analyzedInstructions")
